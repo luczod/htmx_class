@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://www.franken-ui.dev/favicon.ico"
+      sizes="32x32"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/franken-ui-releases@0.0.13/dist/slate.min.css"
+    />
+
+    <title>Htmx - franken-ui</title>
+    <style>
+      .load-img {
+        display: none;
+      }
+      .htmx-request .load-img {
+        display: inline;
+      }
+      .htmx-request.load-img {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body class="uk-padding">
+    <h1>HTMX</h1>
+
+    <!-- trigger -> get -> target -->
+    <input
+      hx-trigger="input changed delay:500ms, search"
+      hx-get="/search"
+      hx-target="#search-results"
+      hx-indicator="#spinner"
+      name="q"
+      class="uk-input uk-width-1-4"
+      type="search"
+      placeholder="typing a number"
+    />
+    <!--   <span
+      class="uk-margin-small-right"
+      style="vertical-align: middle"
+      uk-icon="icon: search;"
+    ></span> -->
+    <span class="load-img">
+      <!--  <img
+        id="spinner"
+        alt="Result loading..."
+        class="load-img"
+        width="40"
+        src="/spinner.svg"
+      / -->
+      loading...
+    </span>
+
+    <section class="uk-flex uk-flex-column">
+      <div
+        id="search-results"
+        class="uk-cover-container uk-margin-top uk-width-1-4 uk-height-medium"
+      >
+        <img src="https://picsum.photos/id/0/400/600" alt="random image" />
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
+    <script
+      src="https://unpkg.com/htmx.org@2.0.0/dist/htmx.js"
+      integrity="sha384-Xh+GLLi0SMFPwtHQjT72aPG19QvKB8grnyRbYBNIdHWc2NkCrz65jlU7YrzO6qRp"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

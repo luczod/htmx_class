@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTMX - bootstrap</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="icon"
+      href="https://getbootstrap.com/docs/5.3/assets/img/favicons/favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <script
+      src="https://unpkg.com/htmx.org@1.9.12"
+      integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="scripts.js" defer></script>
+    <style>
+      .w-10 {
+        max-width: 150px;
+      }
+      .text-danger {
+        color: red;
+      }
+    </style>
+  </head>
+  <body class="p-3 d-flex flex-column w-25 mb-3">
+    <h3>HTMX</h3>
+
+    <!-- hx-get exemple -->
+    <button
+      class="btn btn-primary btn-sm my-2 w-10"
+      hx-get="/load-content"
+      hx-trigger="click"
+      hx-target="#content-get"
+    >
+      Load content get
+    </button>
+    <div id="content-get"></div>
+
+    <!-- hx-post exemple -->
+    <!-- replace all form if there isn't target -->
+    <form
+      class="mt-3"
+      hx-post="/submit-form"
+      hx-trigger="submit"
+      hx-target="#content-post"
+    >
+      <label for="username">Name:</label>
+      <input type="text" name="username" class="form-control mb-2" />
+      <button type="submit" class="btn btn-secondary btn-sm">submit</button>
+    </form>
+    <!-- target to form -->
+    <div id="content-post"></div>
+
+    <!-- swap - replace a target tag -->
+    <button
+      class="btn btn-success my-2 w-10"
+      hx-get="/swap-content"
+      hx-trigger="click"
+      hx-target="#content-swap"
+      hx-swap="outerHTML"
+    >
+      swap html
+    </button>
+    <div id="content-swap"></div>
+
+    <!-- hx-vals - extra values in body -->
+    <form
+      class="mt-3"
+      hx-post="/additional-values"
+      hx-trigger="submit"
+      hx-target="#content-vals"
+      hx-vals='{"keyExtra": "valueExtra"}'
+    >
+      <label for="username">Extra values:</label>
+      <input type="text" name="username" class="form-control mb-2" />
+      <button class="btn btn-danger btn-sm">submit</button>
+    </form>
+    <div id="content-vals"></div>
+
+    <!-- pooling - setInterval() -->
+    <div hx-get="/time-server" hx-trigger="every 5s" hx-target="#server-time">
+      setInterval
+    </div>
+    <div id="server-time"></div>
+
+    <!-- validations -->
+    <form
+      hx-post="/submit-form-validation"
+      hx-trigger="submit"
+      hx-target="#result"
+      hx-vals='{"keyExtra": "valueExtra"}'
+    >
+      <label for="username">Validations:</label>
+      <input
+        id="id_username"
+        type="text"
+        name="username"
+        class="form-control mb-2"
+        required
+      />
+      <small id="username-error" class="text-danger d-block"></small>
+      <div id="result"></div>
+      <button class="btn btn-warning btn-sm">submit</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{% if products %}
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td class="w-25">
+        <button
+          hx-delete="{% url 'delete_product' product.id %}"
+          class="btn btn-danger btn-sm"
+          hx-trigger="click"
+          hx-target="#products-list"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h4>no products</h4>
+{% endif %}
