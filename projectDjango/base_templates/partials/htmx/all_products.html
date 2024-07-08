@@ -11,10 +11,10 @@
   <tbody>
     {% for product in products %}
     <tr>
-      <th scope="row">{{ forloop.counter }}</th>
+      <th scope="row" class="w-fit">{{ forloop.counter }}</th>
       <td>{{ product.name }}</td>
       <td>{{ product.price }}</td>
-      <td class="w-25">
+      <td class="w-fit">
         <button
           hx-delete="{% url 'delete_product' product.id %}"
           class="btn btn-danger btn-sm"

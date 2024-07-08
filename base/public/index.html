@@ -57,6 +57,7 @@
     <form
       class="mt-3"
       hx-post="/submit-form"
+      hx-on::after-request="this.reset()"
       hx-trigger="submit"
       hx-target="#content-post"
     >

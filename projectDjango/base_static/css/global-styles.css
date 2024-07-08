@@ -1,0 +1,14 @@
+table.table {
+  margin-top: 1rem;
+}
+
+.table thead th {
+  font-size: 18px;
+  color: white;
+  background: purple;
+  text-align: start;
+}
+
+.w-fit {
+  width: 60px;
+}
