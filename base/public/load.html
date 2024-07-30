@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Htmx indicator</title>
+    <style>
+      .jokes {
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        margin: -25px 0 0 -25px;
+        font-size: 20px;
+      }
+
+      .load-div {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div
+      class="jokes"
+      hx-get="https://v2.jokeapi.dev/joke/Any?format=txt&safe-mode"
+    >
+      <button>Load Jokes</button>
+      <img class="htmx-indicator" src="https://i.imgur.com/8THYvPQ.gif" />
+    </div> -->
+    <div class="load-div">
+      <button
+        id="btn"
+        hx-indicator="#imagem"
+        hx-get="https://v2.jokeapi.dev/joke/Any?format=txt&safe-mode"
+        hx-trigger="confirmed"
+        hx-target="#content"
+      >
+        Click Me
+      </button>
+      <img
+        id="imagem"
+        class="htmx-indicator"
+        src="https://i.imgur.com/8THYvPQ.gif"
+      />
+    </div>
+
+    <div id="content"></div>
+
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.getElementById("btn").addEventListener("click", function () {
+        Swal.fire({
+          title: "Do you want to save the changes?",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Save",
+          denyButtonText: `Don't save`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            htmx.trigger(this, "confirmed");
+            Swal.fire("Saved!", "", "success");
+          } else if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
